@@ -1,10 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import productsReducer from '../features/productsSlice';
-import cartReducer from '../features/cartSlice';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export const store = configureStore({
-  reducer: {
-    products: productsReducer,
-    cart: cartReducer,
-  },
-});
+export default function Header() {
+  const cartItems = useSelector(state => state.cart.items);
+  
+  return (
+    <header style={{ display: 'flex', gap: '20px', padding: '10px' }}>
+      <Link to="/">Home</Link>
+      <Link to="/products">Products</Link>
+      <Link to="/cart">Cart ({cartItems.length})</Link>
+    </header>
+  );
+}
